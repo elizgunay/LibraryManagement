@@ -1,0 +1,52 @@
+﻿
+@model LibraryManagement.ViewModels.Authors.CreateVM
+@{
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "CREATE AUTHORS";
+
+}
+
+@using (Html.BeginForm("Create", "Author", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <br />
+        <h4 class="ml-4">Author</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group mb-3 font-weight-bold m-4">
+            @Html.Label("FirstName", "First Name", new { @class = "control-label col-md-2" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mb-3 font-weight-bold m-4">
+            @Html.Label("LastName", "LastName", new { @class = "control-label col-md-2" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group mb-3 font-weight-bold m-4">
+            @Html.Label("BookId", "Book Title", new { @class = "control-label col-md-2" })
+            <div class="col-sm-8">
+                @Html.DropDownList("BookId", (IEnumerable<SelectListItem>)ViewData["bookById"],"--Select--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.BookId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-lg-10 m-4">
+                <input type="submit" value="Create" class="btn btn-outline-primary btn-lg" />
+            </div>
+        </div>
+    </div>
+
+    <div class="m-3">
+        @Html.ActionLink("Back to List", "Index", "Author")
+    </div>
+}

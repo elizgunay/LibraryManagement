@@ -1,0 +1,23 @@
+﻿
+#banner {
+    background-image: linear-gradient(#a517ba,#5f1782);
+    color:#fff;
+    padding-top:5%;
+}
+.promo-title{
+    font-size:40px;
+    font-weight:600;
+    margin-top:80px;
+}
+
+#banner a{
+    color:#fff;
+    text-decoration:none;
+}
+
+.img-fluid{
+    width:70%;
+}
+.bottom-img{
+    width:100%;
+}

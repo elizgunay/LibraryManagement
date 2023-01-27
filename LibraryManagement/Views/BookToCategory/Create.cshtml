@@ -1,0 +1,69 @@
+﻿
+@model LibraryManagement.ViewModels.BookToCategory.CreateVM
+@{
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "CREATE BOOK CATEGORY";
+
+}
+
+@using (Html.BeginForm("Create", "BookToCategory", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        <br />
+        <h4 class="ml-4">Add BookCategory</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group mb-3 font-weight-bold m-3">
+            @Html.Label("BookId", "Book Title", new { @class = "control-label col-md-2" })
+            <div class="col-sm-8">
+                @Html.DropDownList("BookId", (IEnumerable<SelectListItem>)ViewData["bookById"], "--Select--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.BookId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mb-3 font-weight-bold m-3">
+            @Html.Label("CategoryId", "Category Name", new { @class = "control-label col-md-2" })
+
+            <div class="col-sm-8">
+                <ul style="list-style-type:none;" class="mb-5">
+                    @foreach (var category in ViewBag.categoryById)
+                    {
+                        <li><input type="checkbox" name="CategoryIds" value="@category.Id" /> @category.CategoryName</li>
+                    }
+                </ul>
+            </div>
+            @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-lg-10 m-3">
+                <input type="submit" value="Create" class="btn btn-outline-primary btn-lg" />
+            </div>
+        </div>
+    </div>
+
+    <div class="m-3">
+        @Html.ActionLink("Back to List", "Index", "BookToCategory")
+    </div>
+}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.js"></script>
+<script src="//ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.js"></script>
+
+<script>
+    // extend jquery range validator to work for required checkboxes
+    var defaultRangeValidator = $.validator.methods.range;
+    $.validator.methods.range = function (value, element, param) {
+        if (element.type === 'checkbox') {
+            // if it's a checkbox return true if it is checked
+            return element.checked;
+        } else {
+            // otherwise run the default validation function
+            return defaultRangeValidator.call(this, value, element, param);
+        }
+    }
+</script>

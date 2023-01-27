@@ -1,0 +1,59 @@
+﻿
+@model IEnumerable<LibraryManagement.Entities.AuthorToBook>
+@{
+
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "AUTHOR TO BOOKS";
+
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">AuthorToBook List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a href="/AuthorToBook/Create" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i> Add New
+            </a>
+        </div>
+    </div>
+
+    <br /><br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.Label("AuthorId", "First Name")
+                </th>
+                <th>
+                    @Html.Label("AuthorId", "Last Name")
+                </th>
+
+                <th>
+                    @Html.Label("BookId", "Book Title")
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="20%">@obj.Author.FirstName</td>
+                    <td width="20%">@obj.Author.LastName</td>
+
+                    <td width="20%">@obj.Book.Title</td>
+
+                    <td width="10%">
+                        <a href="/AuthorToBook/Edit?Id=@obj.Id" class="btn btn-sm btn-info"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                        <a href="/AuthorToBook/Delete?Id=@obj.Id" class="btn btn-sm btn-danger"><i class="fa-solid fa-user-xmark"></i> Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

@@ -1,0 +1,51 @@
+﻿
+@model IEnumerable<LibraryManagement.Entities.BookToCategory>
+@{
+
+    this.Layout = "/Views/Shared/_Layout.cshtml";
+    ViewData["title"] = "BookToCategory";
+
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Book Category List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a href="/BookToCategory/Create" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i> Add New
+            </a>
+        </div>
+    </div>
+
+    <br /><br />
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.Label("BookId","Book Title")
+                </th>
+                <th>
+                    @Html.Label("CategoryId","Category Name")
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="20%">@obj.Book.Title</td>
+                    <td width="20%">@obj.Category.CategoryName</td>
+
+                    <td width="5%">
+                        <a href="/BookToCategory/Delete?Id=@obj.Id" class="btn btn-sm btn-danger"><i class="fa-solid fa-user-xmark"></i> Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
